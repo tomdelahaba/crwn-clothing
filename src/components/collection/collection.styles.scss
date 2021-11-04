@@ -1,0 +1,14 @@
+.collection-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .collection-name {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .items-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
