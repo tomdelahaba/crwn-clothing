@@ -2,9 +2,9 @@ import React from "react";
 
 import CollectionItem from "../collection-item/collection-item.component";
 
-import "./collection.styles.scss";
+import "./collection-preview.styles.scss";
 
-const Collection = ({ title, routeName, items }) => {
+const CollectionPreview = ({ title, routeName, items }) => {
   return (
     <div className='collection-wrapper'>
       <h1 className='collection-name'>{title}</h1>
@@ -19,4 +19,4 @@ const Collection = ({ title, routeName, items }) => {
   );
 };
 
-export default Collection;
+export default CollectionPreview;

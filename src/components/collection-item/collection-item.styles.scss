@@ -1,11 +1,10 @@
 .collection-item-wrapper {
   height: 350px;
+  display: flex;
   align-items: center;
   flex-direction: column;
-  flex: 1 1 0px;
-  margin-right: 20px;
+  width: 22vw;
   position: relative;
-  display: flex;
 
   &:last-child {
     margin-right: 0px;
