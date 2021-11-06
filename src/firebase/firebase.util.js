@@ -6,6 +6,8 @@ import "firebase/compat/auth";
 // const fConfig = keys.publishableFirebaseKey;
 const fConfig = process.env.REACT_APP_FIREBASE_KEY;
 
+console.log(fConfig);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
