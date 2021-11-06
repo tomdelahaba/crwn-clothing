@@ -1,5 +1,7 @@
-# ABOUT
+# RELEASED ON
+https://ecomm-crwn-clothing.herokuapp.com/
 
+# ABOUT
 This project from Zerotomastery academy is one of my best projects I am working on and I implemented yet. Its fully working ecommerce platform where I can touch and play with multiple tools as redux (not implemented yet), graphql (not implemented yet), firebase are.
 I would like to focus on many different things in here including testing.
 
