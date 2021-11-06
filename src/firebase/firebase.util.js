@@ -1,9 +1,10 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import keys from "../config/config";
+// import keys from "../config/config";
 
-const fConfig = keys.publishableFirebaseKey;
+// const fConfig = keys.publishableFirebaseKey;
+const fConfig = process.env.REACT_APP_FIREBASE_KEY;
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
