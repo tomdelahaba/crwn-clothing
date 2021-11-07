@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import ShopPage from "../../pages/shop/shop.component";
 
 /* const COLLECTION_ID_MAP = {
   hats: 1,
