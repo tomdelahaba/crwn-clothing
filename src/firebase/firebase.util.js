@@ -1,9 +1,9 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import keys from "../config/config";
+// import keys from "../config/config";
 
-const fConfig = {
+/* const fConfig = {
   apiKey: keys.REACT_APP_FIREBASE_API_KEY,
   authDomain: keys.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: keys.REACT_APP_FIREBASE_PROJECT_ID,
@@ -13,8 +13,10 @@ const fConfig = {
   measurementId: keys.REACT_APP_MEASUREMENT_ID,
 };
 
+*/
+
 console.warn(process.env.REACT_APP_FIREBASE_API_KEY);
-/*
+
 const fConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -23,7 +25,7 @@ const fConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
-};*/
+};
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
