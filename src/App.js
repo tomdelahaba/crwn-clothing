@@ -1,3 +1,8 @@
+/*
+ ** AddCollectionAndDocuments comments are in here if anytime I will need to import collections
+ ** and documents into firebase, I can use this one
+ */
+
 import React from "react";
 import "./App.css";
 
@@ -13,13 +18,20 @@ import ShopPage from "./pages/shop/shop.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.util";
+import {
+  auth,
+  createUserProfileDocument,
+  /* addCollectionAndDocuments, */
+} from "./firebase/firebase.util";
 import { selectCurrentUser } from "./redux/user/user.selector";
+
+/* import { selectCollectionsForPreview } from "./redux/shop/shop.selector"; */
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    /* const { setCurrentUser, collectionsArray } = this.props; */
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -34,6 +46,10 @@ class App extends React.Component {
       }
 
       setCurrentUser(userAuth);
+      /* addCollectionAndDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      ); */
     });
   }
 
@@ -68,6 +84,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  /* collectionsArray: selectCollectionsForPreview, */
 });
 
 const mapDispatchProps = (dispatch) => ({
