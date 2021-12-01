@@ -24,6 +24,9 @@ export const fetchCollectionFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
+/*
+ ** Because of saga, we never call this anymore. New call for this async start is in ./shop.sagas
+ */
 export const fetchCollectionsStartAsync = () => {
   return (dispatch) => {
     const collectionRef = firestore.collection("collections");
