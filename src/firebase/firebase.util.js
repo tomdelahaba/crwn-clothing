@@ -46,6 +46,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(fConfig);
 
+// this method is never called anymore as it was used only once for batching the collections into the firebase database
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -81,12 +82,22 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   }, {});
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+// signInWithGoogle never called anymore
 export const signInWithGoogle = () =>
-  auth.signInWithPopup(provider).catch((e) => console.error(e));
+  auth.signInWithPopup(googleProvider).catch((e) => console.error(e));
 
 export default firebase;
