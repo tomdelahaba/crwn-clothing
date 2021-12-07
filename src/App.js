@@ -3,7 +3,7 @@
  ** and documents into firebase, I can use this one
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -21,47 +21,40 @@ import { checkUserSession } from "./redux/user/user.actions";
 
 /* import { selectCollectionsForPreview } from "./redux/shop/shop.selector"; */
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-    checkUserSession();
-
-    /* addCollectionAndDocuments(
+const App = ({ checkUserSession, currentUser }) => {
+  /* addCollectionAndDocuments(
         "collections",
         collectionsArray.map(({ title, items }) => ({ title, items }))
       ); */
-  }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession]);
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route
-            exact
-            path='/signin'
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to='/' />
-              ) : (
-                <SignInSignUpPage />
-              )
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
+  // unsubscribeFromAuth = null;
+
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
+
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
+        <Route
+          exact
+          path='/signin'
+          render={() =>
+            currentUser ? <Redirect to='/' /> : <SignInSignUpPage />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   checkUserSession: () => dispatch(checkUserSession()),
