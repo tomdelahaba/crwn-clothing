@@ -7,8 +7,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
 
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -21,21 +20,20 @@ import { checkUserSession } from "./redux/user/user.actions";
 
 /* import { selectCollectionsForPreview } from "./redux/shop/shop.selector"; */
 
-const App = ({ checkUserSession, currentUser }) => {
-  /* addCollectionAndDocuments(
-        "collections",
-        collectionsArray.map(({ title, items }) => ({ title, items }))
-      ); */
+const App = () => {
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    checkUserSession();
-  }, [checkUserSession]);
+    dispatch(checkUserSession());
+  }, [dispatch]);
 
-  // unsubscribeFromAuth = null;
-
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
+  /* 
+    addCollectionAndDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      ); 
+  */
 
   return (
     <div>
@@ -56,13 +54,15 @@ const App = ({ checkUserSession, currentUser }) => {
   );
 };
 
+/* 
 const mapDispatchToProps = (dispatch) => ({
   checkUserSession: () => dispatch(checkUserSession()),
 });
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  /* collectionsArray: selectCollectionsForPreview, */
+  // collectionsArray: selectCollectionsForPreview,
 });
+ */
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

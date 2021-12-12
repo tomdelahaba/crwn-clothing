@@ -1,13 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { selectCartItems } from "../../redux/cart/cart.selector";
 import { toggleDropdownVisibility } from "../../redux/cart/cart.actions";
 
 import CartItem from "../cart-item/cart-item.component";
-
-import { withRouter } from "react-router-dom";
 
 import {
   CartDropdownContainer,
@@ -16,34 +14,30 @@ import {
   CartDropdownButton,
 } from "./cart-dropdown.styles";
 
-const CartDropdown = ({ cartItems, history, toggleDropdownVisibility }) => (
-  <CartDropdownContainer>
-    <CartItemsContainer>
-      {cartItems.length ? (
-        cartItems.map((item) => <CartItem key={item.id} item={item} />)
-      ) : (
-        <EmptyMessageContainer>Your cart is empty.</EmptyMessageContainer>
-      )}
-    </CartItemsContainer>
-    <CartDropdownButton
-      onClick={() => {
-        history.push("/checkout");
-        toggleDropdownVisibility();
-      }}
-    >
-      GO TO CHECKOUT
-    </CartDropdownButton>
-  </CartDropdownContainer>
-);
+const CartDropdown = () => {
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-});
+  return (
+    <CartDropdownContainer>
+      <CartItemsContainer>
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} item={item} />)
+        ) : (
+          <EmptyMessageContainer>Your cart is empty.</EmptyMessageContainer>
+        )}
+      </CartItemsContainer>
+      <CartDropdownButton
+        onClick={() => {
+          history.push("/checkout");
+          dispatch(toggleDropdownVisibility());
+        }}
+      >
+        GO TO CHECKOUT
+      </CartDropdownButton>
+    </CartDropdownContainer>
+  );
+};
 
-const mapDispatchProps = (dispatch) => ({
-  toggleDropdownVisibility: () => dispatch(toggleDropdownVisibility()),
-});
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchProps)(CartDropdown)
-);
+export default CartDropdown;
